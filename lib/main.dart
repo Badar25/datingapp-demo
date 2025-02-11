@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'src/application/providers/user_provider.dart';
 import 'src/data/repositories/mock_user_repository.dart';
+import 'src/presentation/auth/register.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         builder: (theme) => CupertinoApp(
           title: 'Dating App',
           theme: theme,
-          home: const Home(),
+          home: const Register(),
         ),
       ),
     );

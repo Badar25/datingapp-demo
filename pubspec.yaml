@@ -19,6 +19,7 @@ dependencies:
   flutter_card_swiper: ^7.0.2
   adaptive_theme: ^3.7.0
 
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

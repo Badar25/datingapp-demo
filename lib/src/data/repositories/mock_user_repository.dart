@@ -41,7 +41,6 @@ class MockUserRepository implements UserRepository {
   ];
 
   final Set<String> _rightSwipes = {};
-  final Map<String, Set<String>> _matches = {};
 
   @override
   Future<List<User>> getUsers() async {
