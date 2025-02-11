@@ -18,6 +18,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_card_swiper: ^7.0.2
   adaptive_theme: ^3.7.0
+  dio:
+  logger:
 
 
 dev_dependencies:
