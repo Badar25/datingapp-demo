@@ -20,6 +20,9 @@ dependencies:
   adaptive_theme: ^3.7.0
   dio:
   logger:
+  get_it:
+  fluttertoast:
+
 
 
 dev_dependencies:

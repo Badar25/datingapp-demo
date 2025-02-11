@@ -1,8 +1,11 @@
-import '../entities/user.dart';
+import 'package:dating/src/data/models/user_model.dart';
+
+import '../../core/network/dio_wrapper.dart';
+import '../../data/models/swipe_response.dart';
 
 abstract class UserRepository {
-  Future<List<User>> getUsers();
-  Future<bool> swipeRight(String userId);
-  Future<bool> swipeLeft(String userId);
-  Future<bool> checkMatch(String userId);
+  Future<Result<List<UserModel>>> getUsers();
+  Future<Result<SwipeResponse>> swipeRight(String userId);
+  Future<Result<bool>> swipeLeft(String userId);
+  Future<Result<UserModel>> registerUser(UserModel user);
 }

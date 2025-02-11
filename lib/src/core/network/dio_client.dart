@@ -1,4 +1,5 @@
 
+import 'package:dating/src/common/constants/api_urls.dart';
 import 'package:dio/dio.dart';
 
 import 'logger_interceptor.dart';
@@ -12,6 +13,7 @@ class DioClient {
         headers: {
           'Content-Type': 'application/json; charset=UTF-8'
         },
+        baseUrl: ApiUrls.baseUrl,
         responseType: ResponseType.json,
         sendTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10)

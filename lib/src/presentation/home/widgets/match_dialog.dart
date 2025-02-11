@@ -1,8 +1,10 @@
+import 'package:dating/src/common/constants/seed.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import '../../../domain/entities/user.dart';
+import '../../../data/models/user_model.dart';
 
 class MatchDialog extends StatelessWidget {
-  final User user;
+  final UserModel user;
 
   const MatchDialog({
     super.key,
@@ -11,13 +13,27 @@ class MatchDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AlertDialog(
-      title: const Text('It\'s a Match! 🎉'),
-      content: Text('You and ${user.name} liked each other!'),
+    return CupertinoAlertDialog(
+      title: const Text('Match! 🎉'),
+      content: Column(
+        children: [
+          Text('You and ${user.name} liked each other 😍'),
+          Image.network(
+            user.imageUrl ?? defaultImageUrl(),
+            width: 100,
+            height: 100,
+            fit: BoxFit.cover,
+            loadingBuilder: (context, child, loadingProgress) {
+              if (loadingProgress == null) return child;
+              return const Center(child: CircularProgressIndicator());
+            },
+          ),
+        ],
+      ),
       actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context),
-          child: const Text('Continue Swiping'),
+        CupertinoDialogAction(
+          onPressed: () => Navigator.of(context).pop(),
+          child: const Text('Close'),
         ),
       ],
     );

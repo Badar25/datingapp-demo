@@ -12,7 +12,7 @@ class PrimaryButton extends StatelessWidget {
       onPressed: onPressed,
       color: primaryColor,
       borderRadius: BorderRadius.circular(12),
-      padding: const EdgeInsets.symmetric(vertical: 16),
+      padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
       child: Text(
         title,
         style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w600),

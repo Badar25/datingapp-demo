@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/user.dart';
+
+import '../../common/constants/seed.dart';
+import '../../data/models/user_model.dart';
 
 class UserCard extends StatelessWidget {
-  final User user;
+  final UserModel user;
 
   const UserCard({
     super.key,
@@ -23,7 +25,7 @@ class UserCard extends StatelessWidget {
             // Image
             Positioned.fill(
               child: Image.network(
-                user.imageUrl,
+               user.imageUrl ??"",
                 fit: BoxFit.cover,
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress == null) return child;
@@ -57,7 +59,7 @@ class UserCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${user.name}, ${user.age}',
+                    user.name,
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 24,
@@ -66,7 +68,7 @@ class UserCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    user.bio,
+                    user.bio ?? "",
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16,

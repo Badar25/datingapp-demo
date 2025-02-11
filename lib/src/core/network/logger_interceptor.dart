@@ -19,6 +19,7 @@ class LoggerInterceptor extends Interceptor {
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final requestPath = '${options.baseUrl}${options.path}';
     logger.i('${options.method} request ==> $requestPath'); //Info log
+    logger.i('BODY: ${options.data}'); //Info log
     handler.next(options); // continue with the Request
   }
 

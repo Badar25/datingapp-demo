@@ -1,11 +1,10 @@
-import 'package:adaptive_theme/adaptive_theme.dart';
-import 'package:dating/src/core/theme/app_colors.dart';
+import 'package:dating/src/data/models/user_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_card_swiper/flutter_card_swiper.dart';
 import 'package:provider/provider.dart';
+
 import '../../application/providers/user_provider.dart';
-import '../../domain/entities/user.dart';
 import 'widgets/match_dialog.dart';
 import 'widgets/profile_card_swiper.dart';
 import 'widgets/swipe_buttons.dart';
@@ -42,8 +41,13 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
-      navigationBar: const CupertinoNavigationBar( 
-        middle:  Text("Dating app"),
+      navigationBar:  CupertinoNavigationBar(
+        middle:  GestureDetector(
+
+          onTap: (){
+            _showMatchDialog(UserModel(id: "id", name: "name", imageUrl: null));
+          },
+            child: Text("Dating app")),
         trailing: ChangeThemeMode(),
       ),
       child: SafeArea(
@@ -51,10 +55,6 @@ class _HomeState extends State<Home> {
           builder: (context, userProvider, child) {
             if (userProvider.isLoading) {
               return const Center(child: CircularProgressIndicator());
-            }
-
-            if (userProvider.error != null) {
-              return Center(child: Text('Error: ${userProvider.error}'));
             }
 
             if (userProvider.users.isEmpty) {
@@ -90,24 +90,17 @@ class _HomeState extends State<Home> {
     return true;
   }
 
-  void _handleRightSwipe(User user) {
-    context.read<UserProvider>().swipeRight(user.id).then((success) {
-      if (success) {
-        _checkForMatch(user);
-      }
-    });
-  }
+  void _handleRightSwipe(UserModel user) {
+    context.read<UserProvider>().swipeRight(user.id!).then((matchedUser) {
 
-  void _handleLeftSwipe(User user) {
-    context.read<UserProvider>().swipeLeft(user.id);
-  }
-
-  void _checkForMatch(User user) {
-    context.read<UserProvider>().checkMatch(user.id).then((isMatch) {
-      if (isMatch) {
+      if (matchedUser != null) {
         _showMatchDialog(user);
       }
     });
+  }
+
+  void _handleLeftSwipe(UserModel user) {
+    context.read<UserProvider>().swipeLeft(user.id!);
   }
 
   bool _onUndo(
@@ -119,8 +112,8 @@ class _HomeState extends State<Home> {
     return true;
   }
 
-  void _showMatchDialog(User user) {
-    showDialog(
+  void _showMatchDialog(UserModel user) {
+    showCupertinoDialog(
       context: context,
       builder: (context) => MatchDialog(user: user),
     );
